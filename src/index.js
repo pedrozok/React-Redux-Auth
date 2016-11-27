@@ -12,7 +12,10 @@ import Authentication from './components/require_auth';
 
 import reducers from './reducers';
 
+// Redux Thunk
 import ReduxThunk from 'redux-thunk'
+
+// Routing
 import {Router, Route, browserHistory} from 'react-router';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
