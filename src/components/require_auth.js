@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Notifications, {notify} from 'react-notify-toast';
 
 export default function(ComposedComponent) {
   class Authentication extends Component {
@@ -9,12 +10,16 @@ export default function(ComposedComponent) {
 
     componentWillMount() {
       if (!this.props.authenticated.authenticated) {
+
+        notify.show('Please login first', 'error', 3000);
         this.context.router.push('/');
+
       }
     }
 
     componentWillUpdate(nextProps) {
       if (!nextProps.authenticated.authenticated) {
+         notify.show('Please login first', 'error', 3000);
         this.context.router.push('/');
       }
     }

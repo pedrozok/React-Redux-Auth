@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 
 import App from './components/app';
 import Login from './containers/login';
+import Register from './containers/Register';
 import Dashboard from './containers/dashboard';
 import Profile from './containers/profile';
 
@@ -31,6 +32,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={Login}/>
+      <Route path="/register" component={Register}/>
       <Route path="/" component={App}>
          <Route path="dashboard" component={Authentication(Dashboard)}/>
          <Route path="profile" component={Authentication(Profile)}/>

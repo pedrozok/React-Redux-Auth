@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { doLogin } from '../actions'
+import { doRegistration } from '../actions'
 
 import Notifications, {notify} from 'react-notify-toast';
 
-class Login extends Component {
+class Register extends Component {
 
   static contextTypes = {
     router: React.PropTypes.object
@@ -16,22 +16,18 @@ class Login extends Component {
   }
 
   componentWillMount() {
-    if (this.props.authenticated.authenticated) {
-      this.context.router.push('/dashboard');
-    }
+
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.authenticated.authenticated) {
-      this.context.router.push('/dashboard');
-    }
   }
 
-  doLogin(e) {
+  doRegistration(e) {
     e.preventDefault()
 
-    this.props.doLogin({
+    this.props.doRegistration({
       username: this.refs.txt_username.value,
+      email: this.refs.txt_email.value,
       password: this.refs.txt_password.value
     });
   }
@@ -42,16 +38,15 @@ class Login extends Component {
         <Notifications />
 
         <div className="logo-container">
-          <img src="http://iosicongallery.com/img/512/slack-2014.png" className="login-logo" />
+          <img src="http://quobits.com/assets/img/logo_dotted.png" className="login-logo" />
         </div>
 
         <div className="form-container">
-          <form className="form-signin" onSubmit={this.doLogin.bind(this)}>
+          <form className="form-signin" onSubmit={this.doRegistration.bind(this)}>
             <input type="text" className="form-control" name="username" placeholder="Username" required="true" ref="txt_username"/>
+            <input type="text" className="form-control" name="email" placeholder="email" required="true" ref="txt_email"/>
             <input type="password" className="form-control" name="password" placeholder="Password" required="true" ref="txt_password"/>
-           <button className="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-
-           <a onClick={() => this.context.router.push('/register')} className="pink-link">register here</a>
+           <button className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
 
          </form>
         </div>
@@ -63,12 +58,12 @@ class Login extends Component {
 
 function mapStateToProps(state) {
   return {
-    authenticated : state.auth
+
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return { doLogin: bindActionCreators(doLogin, dispatch) }
+  return { doRegistration: bindActionCreators(doRegistration, dispatch) }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Register)
